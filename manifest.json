@@ -14,8 +14,10 @@
                 "https://medium.com/*"
             ],
             "js": [
+                "helpers.js",
                 "content.js"
-            ]
+            ],
+            "type": "module"
         }
     ],
     "host_permissions": [
@@ -24,10 +26,13 @@
     "web_accessible_resources": [
         {
             "resources": [
-                "logo.png"
+                "logo.png",
+                "./helper.js",
+                "./content.js",
+                "helpers.js"
             ],
             "matches": [
-                "<all_urls>"
+                "https://medium.com/*"
             ]
         }
     ]
