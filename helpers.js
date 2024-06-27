@@ -24,22 +24,54 @@ export function createAnnotatedEntry(entry) {
     tooltip.style.padding = "5px 10px";
     tooltip.textContent = entry.term + ": " + entry.entry.definition;
     tooltip.style.display = "none";
+    tooltip.style.zIndex = "1000";
     annotatedEntry.appendChild(tooltip);
 
     // Show tooltip on hover
     annotatedEntry.addEventListener("mouseenter", () => {
+        console.log("hee")
         tooltip.style.display = "block";
         annotatedEntry.style.backgroundColor = "rgba(0, 0, 0, 0.5)";
     });
 
     // Hide tooltip on mouse leave
     annotatedEntry.addEventListener("mouseleave", () => {
+        console.log("haw")
+
         tooltip.style.display = "none";
         annotatedEntry.style.backgroundColor = "rgba(0, 0, 0, 0)";
     });
 
 
     return annotatedEntry;
+}
+
+export async function processTweet(tweetElement, sentencesCallback) {
+    const tweetId = `tweet-annotated-${Math.random()}`;
+    tweetElement.id = tweetId;
+
+    const mappedParagraphs = [{elementId: tweetId, sentence: tweetElement.textContent}]
+
+    try {
+        console.log(mappedParagraphs)
+        const response = await fetch(`https://testnextjscors.vercel.app/api/users`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ sentences: mappedParagraphs }),
+        });
+
+        const data = await response.json();
+        const { data: { parsedSentences } } = data;
+        console.log(parsedSentences);
+
+
+        sentencesCallback(parsedSentences);
+
+    } catch (error) {
+        console.error("Error fetching data:", error);
+    }
 }
 
 export async function processParagraphs(paragraphClassName, sentencesCallback) {

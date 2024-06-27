@@ -14,8 +14,16 @@
                 "https://medium.com/*"
             ],
             "js": [
-                "helpers.js",
-                "content.js"
+                "medium.js"
+            ],
+            "type": "module"
+        },
+        {
+            "matches": [
+                "https://x.com/*"
+            ],
+            "js": [
+                "twitter.js"
             ],
             "type": "module"
         }
@@ -27,12 +35,11 @@
         {
             "resources": [
                 "logo.png",
-                "./helper.js",
-                "./content.js",
                 "helpers.js"
             ],
             "matches": [
-                "https://medium.com/*"
+                "https://medium.com/*",
+                "https://x.com/*"
             ]
         }
     ]
