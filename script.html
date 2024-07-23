@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Data Example</title>
+</head>
+<body>
+    <script>
+        async function fetchData() {
+            try {
+                const response = await fetch('https://testnextjscors.vercel.app/api/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ sentences: [{ elementId: 'dummy', sentence: 'Man, blinks are such a cool thing' }] }),
+                });
+
+                const data = await response.json();
+                const { data: { parsedSentences } } = data;
+                console.log(parsedSentences);
+
+                // Define or call your callback function
+                sentencesCallback(parsedSentences);
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        // Example callback function definition
+        function sentencesCallback(parsedSentences) {
+            console.log('Parsed Sentences:', parsedSentences);
+        }
+
+        // Call the fetchData function
+        fetchData();
+    </script>
+</body>
+</html>
