@@ -2,9 +2,7 @@
 // import { processParagraphs, createAnnotatedEntry } from "./helpers";
 (async () => {
     const src = chrome.runtime.getURL("./helpers.js");
-    const {testImport, createAnnotatedEntry, processParagraphs} = await import(src);
-    console.log(testImport);
-    testImport();
+    const {createAnnotatedEntry, processParagraphs} = await import(src);
     addButtonWhenReady();
     function addButtonWhenReady() {
         const intervalId = setInterval(() => {
@@ -24,6 +22,7 @@
                 button.onclick = async () => {
                     await processParagraphs("pw-post-body-paragraph", (parsedSentences) => {
                         parsedSentences.forEach((parsedSentenceAndEntry, index) => {
+                            console.log(parsedSentenceAndEntry)
                             const paragraphElement = document.getElementById(parsedSentenceAndEntry.elementId);
                             const parsedSentence = parsedSentenceAndEntry.sentence;
                             paragraphElement.innerHTML = "";
@@ -32,9 +31,10 @@
                             console.log(parsedSentence)
                             for (let i = 0; i < parsedSentence.length; i++) {
                                 const entry = parsedSentence[i];
-                                if (typeof entry === "string") {
+                                if ("word" in entry) {
                                     const textDiv = document.createElement("div");
-                                    textDiv.textContent =  " " + entry + " ";
+                                    textDiv.textContent =  i == 0 ? entry.word + " ": (" " + entry.word + " ");
+
                                     textDiv.style.display = "inline";
                                     paragraphElement.appendChild(textDiv);
                                 } else {
