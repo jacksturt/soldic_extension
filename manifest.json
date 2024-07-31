@@ -26,6 +26,15 @@
                 "twitter.js"
             ],
             "type": "module"
+        },
+        {
+            "matches": [
+                "https://solanareport.carrd.co/"
+            ],
+            "js": [
+                "cardd.js"
+            ],
+            "type": "module"
         }
     ],
     "host_permissions": [
@@ -39,7 +48,8 @@
             ],
             "matches": [
                 "https://medium.com/*",
-                "https://x.com/*"
+                "https://x.com/*",
+                "https://solanareport.carrd.co/*"
             ]
         }
     ]
