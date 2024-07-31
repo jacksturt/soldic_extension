@@ -22,13 +22,11 @@
                 button.onclick = async () => {
                     await processParagraphs("pw-post-body-paragraph", (parsedSentences) => {
                         parsedSentences.forEach((parsedSentenceAndEntry, index) => {
-                            console.log(parsedSentenceAndEntry)
                             const paragraphElement = document.getElementById(parsedSentenceAndEntry.elementId);
                             const parsedSentence = parsedSentenceAndEntry.sentence;
                             paragraphElement.innerHTML = "";
                             paragraphElement.style.display = "inline-block";
                             paragraphElement.style.position = "relative";
-                            console.log(parsedSentence)
                             for (let i = 0; i < parsedSentence.length; i++) {
                                 const entry = parsedSentence[i];
                                 if ("word" in entry) {
